@@ -3,5 +3,6 @@ description = Allows to create custom facets
 package = easyDDB
 core = 7.x
 version = 7.x-0.1
+configure = admin/config/ting/facets_custom
 dependencies[] = ting
 dependencies[] = ding_facetbrowser

@@ -39,7 +39,7 @@ function ting_facet_custom_permission() {
 /**
  * Implements hook_theme().
  */
-function ting_facet_custom_theme() {
+function ting_facet_custom_theme($existing, $type, $theme, $path) {
   $hooks = array();
 
   $hooks['ting_facet_custom_facet_element'] = array(
@@ -71,9 +71,9 @@ function theme_ting_facet_custom($variables) {
 }
 
 /**
- * Custom themeing callback for FE facet checkboxes.
+ * Custom theming callback for FE facet checkboxes.
  *
- * Handle checkboxes display, as well as various markup needed for those.
+ * Handle checkboxes display, as well as specific markup for those.
  *
  * @see ting_facet_custom_facet_form()
  * @see ting_facet_custom_theme()

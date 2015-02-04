@@ -40,7 +40,6 @@ function ting_facet_custom_admin_form($form, &$form_state) {
     ),
   );
 
-
   $form['facet_name'] = array(
     '#type' => 'textfield',
     '#title' => t('Facet name'),
@@ -141,6 +140,9 @@ function ting_facet_custom_admin_form_submit($form, &$form_state) {
  *   The form state.
  * @param array $default
  *   Default form elements values, if any.
+ *
+ * @return array
+ *   Form structure.
  */
 function ting_facet_custom_row_form(&$form_state, $default = array()) {
   $form = array();
@@ -178,12 +180,19 @@ function _ting_facet_custom_row_callback($form, &$form_state) {
   return $form['facets_wrapper'];
 }
 
+/**
+ * AJAX callback for fetch facet terms button.
+ *
+ * @see ting_facet_custom_admin_form()
+ */
 function _ting_facet_custom_fetch_facet_callback($form, &$form_state) {
   return $form;
 }
 
 /**
  * Custom submit handler for new row button.
+ *
+ * @see ting_facet_custom_admin_form()
  */
 function _ting_facet_custom_row_submit($form, &$form_state) {
   $form_state['facet_rows']++;
@@ -205,7 +214,7 @@ function _ting_facet_custom_fetch_submit($form, &$form_state) {
 }
 
 /**
- * Custom theming handler for facet rows element.
+ * Custom theming callback for facet rows element.
  *
  * Used to render draggable rows in a table.
  *
@@ -245,7 +254,6 @@ function theme_ting_facet_custom_facet_element($variables) {
 
   $output = theme('table', $table);
   $output .= drupal_render_children($element);
-
 
   return $output;
 }
