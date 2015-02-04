@@ -1,0 +1,235 @@
+<?php
+/**
+ * @file
+ * Create custom ting facets.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function ting_facet_custom_menu() {
+  $menu = array();
+
+  $menu['admin/config/ting/facets_custom'] = array(
+    'title' => 'Ting facets custom',
+    'description' => 'Define custom ting facets.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ting_facet_custom_admin_form'),
+    'access arguments' => array('configure ting custom facets'),
+    'file' => 'ting_facet_custom.admin.inc',
+  );
+
+  return $menu;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function ting_facet_custom_permission() {
+  $perm = array();
+
+  $perm['configure ting custom facets'] = array(
+    'title' => t('Configure ting custom facets'),
+    'description' => t('Grant roles to administer custom ting facets'),
+  );
+
+  return $perm;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ting_facet_custom_theme() {
+  $hooks = array();
+
+  $hooks['ting_facet_custom_facet_element'] = array(
+    'render element' => 'element',
+  );
+
+  $hooks['ting_facet_custom_checkboxes'] = array(
+    'render element' => 'element',
+  );
+
+  $hooks['ting_facet_custom'] = array(
+    'variables' => array(),
+  );
+
+  return $hooks;
+}
+
+/**
+ * Custom theming callback for block content.
+ *
+ * @see ting_facet_custom_block_view()
+ * @see ting_facet_custom_theme()
+ */
+function theme_ting_facet_custom($variables) {
+  $facets = variable_get('facets_wrapper', array());
+  $form = drupal_get_form('ting_facet_custom_facet_form', $facets);
+
+  return drupal_render($form);
+}
+
+/**
+ * Custom themeing callback for FE facet checkboxes.
+ *
+ * Handle checkboxes display, as well as various markup needed for those.
+ *
+ * @see ting_facet_custom_facet_form()
+ * @see ting_facet_custom_theme()
+ */
+function theme_ting_facet_custom_checkboxes($variables) {
+  global $base_root;
+
+  $element = $variables['element'];
+  $facet_identifier = $element['#additional_attributes']['facet_identifier'];
+  $facet_terms = $element['#additional_attributes']['facet_terms'];
+
+  foreach ($facet_terms as $terms) {
+    $query = array();
+    $facet_is_set = FALSE;
+
+    foreach ($terms['terms'] as $term) {
+      $facet_is_set = _ding_factbrowser_is_facet_set('facet.' . $facet_identifier, $term);
+      $facet_string = 'facet.' . $facet_identifier . ':' . $term;
+
+      if ($facet_is_set) {
+        $facet_string = '-' . $facet_string;
+      }
+
+      $query[] = $facet_string;
+    }
+
+    $uri = $base_root . _ding_factbrowser_parse_request_uri();
+    $link = l($terms['facet'], $uri, array('query' => array('facets' => $query)));
+    $elements[] = array(
+      '#type' => $element['#type'],
+      '#title' => $link,
+      '#name' => $facet_identifier,
+      '#attributes' => array(
+        'data-id' => implode(',', $terms['terms']),
+      ),
+      '#checked' => $facet_is_set,
+    );
+  }
+
+  // Hide all checkboxes except the selected one.
+  // Removes the ambiguity within selected facets.
+  // Also emulated original facetbrowser behavior.
+  $render = array_filter($elements, function($v) {
+    return $v['#checked'];
+  });
+
+  if (!empty($render)) {
+    $elements = $render;
+  }
+
+  $output = drupal_render($elements);
+
+  return $output;
+}
+
+/**
+ * FE facets checkboxes form.
+ *
+ * @param array $facets
+ *   Saved custom facets from BE.
+ */
+function ting_facet_custom_facet_form($form, &$form_state, $facets) {
+  if (empty($facets)) {
+    return array();
+  }
+
+  $form['facet_wrapper'] = array(
+    '#type' => 'fieldset',
+    '#title' => check_plain($facets['title']),
+  );
+
+  $form['facet_wrapper']['facets'] = array(
+    '#type' => 'checkbox',
+    '#additional_attributes' => array(
+      'facet_identifier' => $facets['identifier'],
+      'facet_terms' => $facets['facets'],
+    ),
+    '#theme' => 'ting_facet_custom_checkboxes',
+  );
+
+  $form['#attached'] = array(
+    'js' => array(
+      drupal_get_path('module', 'ting_facet_custom') . '/js/ting_facet_custom.scripts.js',
+    ),
+  );
+
+  $form['#attributes'] = array(
+    'class' => array(
+      'ting-facet-custom-form',
+    ),
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function ting_facet_custom_block_info() {
+  $blocks = array();
+
+  $blocks['ting_facet_custom'] = array(
+    'info' => t('Ting custom facet'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function ting_facet_custom_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'ting_facet_custom':
+      $block['content'] = theme('ting_facet_custom');
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Request terms for certain facet.
+ *
+ * @param string $facet
+ *   Facet identifier.
+ *
+ * @return array
+ *   Sorted list of facet terms.
+ */
+function ting_facet_custom_facets($facet = 'facet.department') {
+  module_load_include('client.inc', 'ting');
+
+  $options = array(
+    'facets' => array($facet),
+    'numFacets' => 9999,
+    'reply_only' => TRUE,
+    'sort' => 'random',
+  );
+  $result = ting_do_search("*", 0, 0, $options);
+
+  $types = array();
+  foreach ($result->facets[$facet]->terms as $term => $count) {
+    $types[drupal_strtolower($term)] = $count;
+  }
+
+  $types = array_keys($types);
+  sort($types);
+
+  // Only save if we actually got any types.
+  if (!empty($types)) {
+    variable_set('ting_facet_custom_terms', $types);
+  }
+
+  return $types;
+}
