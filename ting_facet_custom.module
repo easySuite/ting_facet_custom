@@ -191,7 +191,8 @@ function ting_facet_custom_block_view($delta = '') {
 
   switch ($delta) {
     case 'ting_facet_custom':
-      $block['content'] = theme('ting_facet_custom');
+      $results = drupal_static('ting_search_results');
+      $block['content'] = $results->numTotalObjects > 0 ? theme('ting_facet_custom') : '';
       break;
   }
 
