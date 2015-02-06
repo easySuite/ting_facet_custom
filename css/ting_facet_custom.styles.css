@@ -1,4 +1,9 @@
+.pane-ting-facet-custom-ting-facet-custom {
+  clear: both;
+}
+
 #ting-facet-custom-table input,
 #ting-facet-custom-table select {
   width: 96%;
 }
+
