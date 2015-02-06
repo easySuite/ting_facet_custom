@@ -193,6 +193,7 @@ function ting_facet_custom_block_view($delta = '') {
     case 'ting_facet_custom':
       $results = drupal_static('ting_search_results');
       $block['content'] = $results->numTotalObjects > 0 ? theme('ting_facet_custom') : '';
+      drupal_add_css(drupal_get_path('module', 'ting_facet_custom') . '/css/ting_facet_custom.styles.css');
       break;
   }
 
