@@ -84,31 +84,39 @@ function theme_ting_facet_custom_checkboxes($variables) {
   $element = $variables['element'];
   $facet_identifier = $element['#additional_attributes']['facet_identifier'];
   $facet_terms = $element['#additional_attributes']['facet_terms'];
+  $request = urldecode(request_uri());
+  $uri_parts = explode('?', $request);
 
   foreach ($facet_terms as $terms) {
-    $query = array();
     $facet_is_set = FALSE;
+    $facet = '" and facet.department=("' . implode('" or "', $terms['terms']) . '")';
 
-    foreach ($terms['terms'] as $term) {
-      $facet_is_set = _ding_factbrowser_is_facet_set('facet.' . $facet_identifier, $term);
-      $facet_string = 'facet.' . $facet_identifier . ':' . $term;
+    // When the custom facet is already clicked (or exists in URL).
+    if (mb_strpos($request, $facet) !== FALSE) {
+      $facet_is_set = TRUE;
+      $matches = array();
+      preg_match('/cql\.keywords="(.*)" and facet\.department=(.*)/', $request, $matches);
 
-      if ($facet_is_set) {
-        $facet_string = '-' . $facet_string;
-      }
-
-      $query[] = $facet_string;
+      $query = $matches[1];
+      $uri = $query;
+    }
+    // When there is a plain text query string.
+    else {
+      $query = 'cql.keywords="' . arg(2) . '';
+      $uri = $query . $facet;
     }
 
-    $uri = $base_root . _ding_factbrowser_parse_request_uri();
-    $link = l($terms['facet'], $uri, array('query' => array('facets' => $query)));
+    // Append query paramenters (facets) if any.
+    if (!empty($uri_parts[1])) {
+      $uri .= '?' . $uri_parts[1];
+    }
+
+    $link = l($terms['facet'], $base_root . '/search/ting/' . $uri);
+
     $elements[] = array(
       '#type' => $element['#type'],
       '#title' => $link,
       '#name' => $facet_identifier,
-      '#attributes' => array(
-        'data-id' => implode(',', $terms['terms']),
-      ),
       '#checked' => $facet_is_set,
     );
   }
@@ -192,7 +200,7 @@ function ting_facet_custom_block_view($delta = '') {
   switch ($delta) {
     case 'ting_facet_custom':
       $results = drupal_static('ting_search_results');
-      $block['content'] = $results->numTotalObjects > 0 ? theme('ting_facet_custom') : '';
+      $block['content'] = is_object($results) && $results->numTotalObjects > 0 ? theme('ting_facet_custom') : '';
       break;
   }
 
