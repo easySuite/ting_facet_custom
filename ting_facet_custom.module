@@ -245,3 +245,30 @@ function ting_facet_custom_facets($facet = 'facet.department') {
 
   return $types;
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function ting_facet_custom_preprocess_25_50_25(&$variables) {
+  $search_result = arg(0) == 'search' && arg(1) == 'ting';
+
+  if (!$search_result) {
+    return;
+  }
+
+  $block = module_invoke('ting_facet_custom', 'block_view', 'ting_facet_custom');
+  $custom_facet_markup =
+    '<div class="panel-pane pane-block pane-ting-facet-custom">' .
+    '<div class="pane-content">' .
+    render($block['content']) .
+    '</div>' .
+    '</div>';
+
+
+  $left_sidebar = $variables['content']['left_sidebar'];
+  $target = '<div class="panel-pane pane-ding-facetbrowser"';
+  $pos = strpos($left_sidebar, $target);
+  $new_left_content = substr_replace($left_sidebar, $custom_facet_markup, $pos, 0);
+
+  $variables['content']['left_sidebar'] = $new_left_content;
+}
