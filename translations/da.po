@@ -1,0 +1,98 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  ting_facet_custom.admin.inc: n/a
+#  ting_facet_custom.module: n/a
+#  ting_facet_custom.info: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2015-02-19 16:14+0100\n"
+"PO-Revision-Date: 2015-02-20 15:53+0100\n"
+"Last-Translator: Martin Cording <mc@inlead.dk>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Language: da\n"
+"X-Generator: Poedit 1.7.4\n"
+
+#: ting_facet_custom.admin.inc:16
+msgid "Fetch facet terms"
+msgstr "Hent facettens termer"
+
+#: ting_facet_custom.admin.inc:23
+msgid "Facet idenfitier"
+msgstr "Facet identifikator"
+
+#: ting_facet_custom.admin.inc:30
+msgid "Fetch terms"
+msgstr "Hent termer"
+
+#: ting_facet_custom.admin.inc:45
+msgid "Facet name"
+msgstr "Facet navn"
+
+#: ting_facet_custom.admin.inc:73
+msgid "Add option"
+msgstr "Tilføj"
+
+#: ting_facet_custom.admin.inc:86
+msgid "Save configuration"
+msgstr "Gem indstillinger"
+
+#: ting_facet_custom.admin.inc:110
+msgid "Select term(s) for the facet <em>@facet</em>."
+msgstr "Vælg hvilke term(er) der skal tilknyttes facetten <em>@facet</em>."
+
+#: ting_facet_custom.admin.inc:133
+msgid "Custom facets saved."
+msgstr "Facet indstillingerne er gemt."
+
+#: ting_facet_custom.admin.inc:229
+msgid "Facet label"
+msgstr "Facet etiket"
+
+#: ting_facet_custom.admin.inc:230
+msgid "Facet terms"
+msgstr "Facet termer"
+
+#: ting_facet_custom.admin.inc:231
+msgid "Weight"
+msgstr "Vægt"
+
+#: ting_facet_custom.module:32
+msgid "Configure ting custom facets"
+msgstr "Konfigurer special facet"
+
+#: ting_facet_custom.module:33
+msgid "Grant roles to administer custom ting facets"
+msgstr "Tildel roller til at kunne administrere facet indstillinger."
+
+#: ting_facet_custom.module:190
+msgid "Ting custom facet"
+msgstr "Special facet"
+
+#: ting_facet_custom.module:14
+msgid "Ting facets custom"
+msgstr "Special facet"
+
+#: ting_facet_custom.module:15
+msgid "Define custom ting facets."
+msgstr "Definer special facet"
+
+#: ting_facet_custom.info:0
+msgid "Ting facet custom"
+msgstr "Special facet"
+
+#: ting_facet_custom.info:0
+msgid "Allows to create custom facets"
+msgstr "Giver mulighed for at lave en special facet"
+
+#: ting_facet_custom.info:0
+msgid "easyDDB"
+msgstr ""
