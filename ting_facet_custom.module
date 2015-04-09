@@ -89,29 +89,33 @@ function theme_ting_facet_custom_checkboxes($variables) {
 
   foreach ($facet_terms as $terms) {
     $facet_is_set = FALSE;
-    $facet = '" and facet.department=("' . implode('" or "', $terms['terms']) . '")';
+    $facet = ' and facet.department=("' . implode('" or "', $terms['terms']) . '")';
 
     // When the custom facet is already clicked (or exists in URL).
     if (mb_strpos($request, $facet) !== FALSE) {
       $facet_is_set = TRUE;
       $matches = array();
-      preg_match('/cql\.keywords="(.*)" and facet\.department=(.*)/', $request, $matches);
+      preg_match('/(.*) and facet\.department=(.*)/', $request, $matches);
 
       $query = $matches[1];
       $uri = $query;
     }
     // When there is a plain text query string.
     else {
-      $query = 'cql.keywords="' . arg(2) . '';
+      $query = arg(2);
       $uri = $query . $facet;
     }
 
-    // Append query paramenters (facets) if any.
+    // Append query parameters (facets) if any.
     if (!empty($uri_parts[1])) {
       $uri .= '?' . $uri_parts[1];
     }
 
-    $link = l($terms['facet'], $base_root . '/search/ting/' . $uri);
+    if (!$facet_is_set) {
+      $uri = '/search/ting/' . $uri;
+    }
+
+    $link = l($terms['facet'], $base_root . $uri);
 
     $elements[] = array(
       '#type' => $element['#type'],
