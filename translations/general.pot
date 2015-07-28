@@ -3,15 +3,15 @@
 # LANGUAGE translation of Drupal (general)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  ting_facet_custom.admin.inc: n/a
-#  ting_facet_custom.module: n/a
-#  ting_facet_custom.info: n/a
+#  profiles/ding2/modules/ting_facet_custom/ting_facet_custom.admin.inc: n/a
+#  profiles/ding2/modules/ting_facet_custom/ting_facet_custom.module: n/a
+#  profiles/ding2/modules/ting_facet_custom/ting_facet_custom.info: n/a
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-02-19 16:14+0100\n"
+"POT-Creation-Date: 2015-07-28 11:31+0300\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -20,79 +20,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ting_facet_custom.admin.inc:16
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.admin.inc:16
 msgid "Fetch facet terms"
 msgstr ""
 
-#: ting_facet_custom.admin.inc:23
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.admin.inc:23
 msgid "Facet idenfitier"
 msgstr ""
 
-#: ting_facet_custom.admin.inc:30
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.admin.inc:30
 msgid "Fetch terms"
 msgstr ""
 
-#: ting_facet_custom.admin.inc:45
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.admin.inc:45
 msgid "Facet name"
 msgstr ""
 
-#: ting_facet_custom.admin.inc:73
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.admin.inc:73
 msgid "Add option"
 msgstr ""
 
-#: ting_facet_custom.admin.inc:86
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.admin.inc:86
 msgid "Save configuration"
 msgstr ""
 
-#: ting_facet_custom.admin.inc:110
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.admin.inc:110
 msgid "Select term(s) for the facet <em>@facet</em>."
 msgstr ""
 
-#: ting_facet_custom.admin.inc:133
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.admin.inc:133
 msgid "Custom facets saved."
 msgstr ""
 
-#: ting_facet_custom.admin.inc:229
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.admin.inc:229
 msgid "Facet label"
 msgstr ""
 
-#: ting_facet_custom.admin.inc:230
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.admin.inc:230
 msgid "Facet terms"
 msgstr ""
 
-#: ting_facet_custom.admin.inc:231
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.admin.inc:231
 msgid "Weight"
 msgstr ""
 
-#: ting_facet_custom.module:32
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.module:32
 msgid "Configure ting custom facets"
 msgstr ""
 
-#: ting_facet_custom.module:33
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.module:33
 msgid "Grant roles to administer custom ting facets"
 msgstr ""
 
-#: ting_facet_custom.module:190
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.module:194
 msgid "Ting custom facet"
 msgstr ""
 
-#: ting_facet_custom.module:14
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.module:14
 msgid "Ting facets custom"
 msgstr ""
 
-#: ting_facet_custom.module:15
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.module:15
 msgid "Define custom ting facets."
 msgstr ""
 
-#: ting_facet_custom.info:0
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.info:0
 msgid "Ting facet custom"
 msgstr ""
 
-#: ting_facet_custom.info:0
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.info:0
 msgid "Allows to create custom facets"
 msgstr ""
 
-#: ting_facet_custom.info:0
+#: profiles/ding2/modules/ting_facet_custom/ting_facet_custom.info:0
 msgid "easyDDB"
 msgstr ""
 
