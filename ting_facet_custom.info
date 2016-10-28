@@ -1,6 +1,6 @@
 name = Ting facet custom
 description = Allows to create custom facets
-package = easyDDB
+package = easyOPAC
 core = 7.x
 version = 7.x-2.1.0+easy
 configure = admin/config/ting/facets_custom
