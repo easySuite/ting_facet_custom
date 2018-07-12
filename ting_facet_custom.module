@@ -122,6 +122,7 @@ function theme_ting_facet_custom_checkboxes($variables) {
       '#title' => $link,
       '#name' => $facet_identifier,
       '#checked' => $facet_is_set,
+      '#id' => $terms['terms'][0],
     );
   }
 
@@ -137,7 +138,6 @@ function theme_ting_facet_custom_checkboxes($variables) {
   }
 
   $output = drupal_render($elements);
-
   return $output;
 }
 
